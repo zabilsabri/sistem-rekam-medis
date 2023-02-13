@@ -1,0 +1,53 @@
+@extends('admin.layouts.app' , ['title' => 'Menu Admin'])
+@section('content')
+
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content p-4">
+        <div class="container-fluid">
+            <h2 class="text-center display-4">Daftar Riwayat Medis</h2>
+        </div>
+        @if($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
+                <strong> {{$message}} </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <div class="card">
+            <div class="card-header d-flex">
+                <h3 class="card-title p-2 flex-grow-1">Tabel Riwayat Medis</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table class="table table-bordered" id="tableBlog">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">No</th>
+                            <th>Kode RM</th>
+                            <th>Nama</th>
+                            <th>Dokter</th>
+                            <th>Keluhan</th>
+                            <th>Poli</th>
+                            <th>Tgl Berobat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>RM-1</td>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>Test</td>
+                            <td>Umum</td>
+                            <td>10/05/2003</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            
+        </div>
+    </section>
+</div>
+
+@endsection
