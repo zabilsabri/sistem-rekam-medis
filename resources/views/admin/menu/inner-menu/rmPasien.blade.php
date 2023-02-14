@@ -69,7 +69,7 @@
                   </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>Edit</b></a>
+                <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#editDataPasien"><b>Edit</b></a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -84,7 +84,7 @@
           <div class="card">
             <div class="card-header d-flex">
                 <h3 class="card-title p-2 flex-grow-1">Tabel Riwayat Medis Pasien</h3>
-                <a class="btn bg-gradient-danger p-2 text-light" href="createArticle" role="button">+ Tambah</a>
+                <a class="btn bg-gradient-danger p-2 text-light" data-bs-toggle="modal" data-bs-target="#tambahRM" href="createArticle" role="button">+ Tambah</a>
             </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -96,6 +96,8 @@
                             <th>Dokter</th>
                             <th>Keluhan</th>
                             <th>Poli</th>
+                            <th>Obat</th>
+                            <th>Tindakan</th>
                             <th>Tgl Berobat</th>
                         </tr>
                     </thead>
@@ -106,6 +108,8 @@
                             <td>Test</td>
                             <td>Test</td>
                             <td>Umum</td>
+                            <td>Test</td>
+                            <td>Test</td>
                             <td>10/05/2003</td>
                         </tr>
                     </tbody>
@@ -122,5 +126,121 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <!-- Modal Tambah RM -->
+<div class="modal fade" id="tambahRM" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="form-group">
+              <label for="exampleInputBorder">1. Keluhan</label>
+              <input type="text" class="form-control" placeholder="">        
+          </div>
+          <div class="form-group">
+              <label for="exampleInputBorder">2. Poli</label>
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="umum">Umum</option>
+                <option value="gigi">Gigi</option>
+                <option value="mtbs/anak">MTBS/Anak</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="exampleInputBorder">3. Dokter</label>
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Data Pasien -->
+<div class="modal fade" id="editDataPasien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Kunjungan Baru</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="exampleInputBorder">1. Nama</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">2. Nama Kepala Keluarga</label>
+            <input type="text" class="form-control" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">3. Nama Ibu Kandung</label>
+            <input type="text" class="form-control" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">4. Kode Desa</label>
+            <input type="text" class="form-control" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">5. NIK</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">6. Agama</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">7. Tgl Lahir</label>
+            <input class="form-control" type="date" />        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">8. Jenis Kelamin</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">9. Status</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">10. Pekerjaan</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">11. Alamat</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">12. Nomor Telpon</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">13. Jenis Asuransi</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+        <div class="form-group">
+            <label for="exampleInputBorder">14. Nomor Asuransi</label>
+            <input type="text" class="form-control" placeholder="">        
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Simpan Data</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection

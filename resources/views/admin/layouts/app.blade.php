@@ -208,5 +208,11 @@
    </script>
 </script>
 
+<script type="text/javascript">  
+    $('.date').datepicker({  
+       format: 'dd/mm/yyyy'  
+     });  
+</script>  
+
 </body>
 </html>

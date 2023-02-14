@@ -27,6 +27,7 @@
                             <th>Kode</th>
                             <th>Nama</th>
                             <th>Jabatan</th>
+                            <th>Poli</th>
                             <th style="width: 40px">Details</th>
                         </tr>
                     </thead>
@@ -36,7 +37,8 @@
                             <td>KD1</td>
                             <td>Test</td>
                             <td>test</td>
-                            <td><button type="button" class="btn btn-block btn-info">Info</button></td>
+                            <td>Umum</td>
+                            <td><a type="button" href="/profilDokter" class="btn btn-block btn-info">Info</a></td>
                         </tr>
                     </tbody>
                 </table>

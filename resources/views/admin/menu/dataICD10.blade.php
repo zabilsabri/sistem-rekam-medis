@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-header d-flex">
                 <h3 class="card-title p-2 flex-grow-1">Tabel ICD 10</h3>
-                <a class="btn bg-gradient-danger p-2 text-light" href="createArticle" role="button">+ TAMBAH</a>
+                <a class="btn bg-gradient-primary p-2 text-light" role="button" data-bs-toggle="modal" data-bs-target="#tambah">+ TAMBAH</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -26,7 +26,8 @@
                             <th style="width: 10px">No</th>
                             <th>Kode</th>
                             <th>Diagnosa</th>
-                            <th style="width: 40px">Details</th>
+                            <th>Deskripsi</th>
+                            <th style="width: 130px">Details</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +35,11 @@
                             <td>1</td>
                             <td>KD1</td>
                             <td>Test</td>
-                            <td><button type="button" class="btn btn-block btn-info">Info</button></td>
+                            <td>Test test test test test</td>
+                            <td>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -43,6 +48,66 @@
             
         </div>
     </section>
+</div>
+
+
+<!-- Modal Edit Data-->
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Kode ICD 10: </label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Diagnosa: </label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+        </div>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px"></textarea>
+            <label for="floatingTextarea">Deskripsi: </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Tambah Data-->
+<div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Kode ICD 10: </label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Diagnosa: </label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px"></textarea>
+                <label for="floatingTextarea">Deskripsi: </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Edit</button>
+        </div>
+        </div>
+    </div>
 </div>
 
 @endsection

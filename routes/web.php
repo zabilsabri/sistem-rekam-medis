@@ -45,3 +45,8 @@ Route::get('/rmPasien', function () {
     return view('admin.menu.inner-menu.rmPasien');
 });
 
+
+Route::get('/profilDokter', function () {
+    return view('admin.menu.inner-menu.profilDokter');
+});
+
