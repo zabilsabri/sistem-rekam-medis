@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('keluhans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pasien_id');
-            $table->unsignedBigInteger('icd10_id');
+            $table->unsignedBigInteger('icd10_id')->nullable();
             $table->unsignedBigInteger('dokter_id');
-            $table->unsignedBigInteger('obat_id');
             $table->unsignedBigInteger('poli_id');
-            $table->string('tindakan');
+            $table->string('keluhan');
+            $table->string('tindakan')->nullable();
+            $table->timestamps();
             $table->foreign('poli_id')
               ->references('id')->on('polis')->onDelete('cascade');
             $table->foreign('pasien_id')
@@ -29,8 +30,6 @@ return new class extends Migration
                 ->references('id')->on('icd10s')->onDelete('cascade');
             $table->foreign('dokter_id')
                 ->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('obat_id')
-                ->references('id')->on('obats')->onDelete('cascade');
         });
     }
 

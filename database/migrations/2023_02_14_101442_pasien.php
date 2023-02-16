@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('noTelp');
             $table->string('jenis_asuransi');
             $table->string('no_kartu')->nullable();
+            $table->timestamps();
         });
     }
 

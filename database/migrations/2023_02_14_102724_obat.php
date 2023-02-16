@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('jenis_obat');
             $table->string('deskripsi');
+            $table->timestamps();
         });
     }
 

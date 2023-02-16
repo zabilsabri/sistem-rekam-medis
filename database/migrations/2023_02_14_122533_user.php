@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pegawais', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('jabatan');
-            $table->unsignedBigInteger('poli_id');
+            $table->unsignedBigInteger('poli_id')->nullable();
+            $table->timestamps();
             $table->foreign('poli_id')
               ->references('id')->on('polis')->onDelete('cascade');
         });
