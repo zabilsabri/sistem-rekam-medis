@@ -51,21 +51,6 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/articles" class="nav-link">Articles</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/category" class="nav-link">Category</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/subCategory" class="nav-link">Sub Category</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/tag" class="nav-link">Tag</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/userList" class="nav-link">User</a>
-      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -93,8 +78,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+        <img src="{{ asset('image/aAvatar.png') }}" alt="User profile picture" class="img-circle elevation-2">
         </div>
         <div class="info">
+          <a class="d-block">{{Auth::user()->nama}}</a>
         </div>
       </div>
 
@@ -208,11 +195,35 @@
    </script>
 </script>
 
-<script type="text/javascript">  
-    $('.date').datepicker({  
-       format: 'dd/mm/yyyy'  
-     });  
-</script>  
+<script>
+    var input = document.querySelectorAll('.js-date')[0];
+  
+    var dateInputMask = function dateInputMask(elm) {
+      elm.addEventListener('keypress', function(e) {
+        if(e.keyCode < 47 || e.keyCode > 57) {
+          e.preventDefault();
+        }
+        
+        var len = elm.value.length;
+
+        if(len !== 1 || len !== 3) {
+          if(e.keyCode == 47) {
+            e.preventDefault();
+          }
+        }
+        
+        if(len === 2) {
+          elm.value += '/';
+        }
+    
+        if(len === 5) {
+          elm.value += '/';
+        }
+      });
+    };
+      
+    dateInputMask(input);
+  </script>
 
 </body>
 </html>

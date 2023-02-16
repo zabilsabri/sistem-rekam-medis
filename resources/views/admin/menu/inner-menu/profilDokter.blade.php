@@ -7,13 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Profile</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">User Profile</li>
-            </ol>
+            <h1>Profil Dokter</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -29,40 +23,13 @@
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                  <img class="profile-user-img img-fluid img-circle" src="{{ asset('image/dAvatar.png') }}" alt="User profile picture">
                 </div>
+                @foreach($data as $item)
+                <h3 class="profile-username text-center">{{ $item -> nama }}</h3>
 
-                <h3 class="profile-username text-center">Dr. Nina Mcintire</h3>
-
-                <p class="text-muted text-center">Poli : <b>Umum</b></p>
-
-                <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item">
-                        <b>Senin</b> <span class="float-right">07.00 - 16.00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Selasa</b> <span class="float-right">07.00 - 16.00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Rabu</b> <span class="float-right">07.00 - 16.00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Kamis</b> <span class="float-right">07.00 - 16.00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Jum'at</b> <span class="float-right">07.00 - 16.00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Sabtu</b> <span class="float-right">07.00 - 16.00</span>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Minggu</b> <span class="float-right">07.00 - 16.00</span>
-                    </li>
-                    
-                </ul>
-
-                <a href="#" class="btn btn-primary btn-block"><b>Edit Jadwal</b></a>
-                
+                <p class="text-muted text-center">Poli : <b>{{ $item -> poli -> nama }}</b></p>
+                @endforeach
               </div>
               <!-- /.card-body -->
             </div>
@@ -98,15 +65,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                      @foreach ($data2 as $index2 => $item2)
                         <tr>
-                            <td>1</td>
-                            <td>RM-1</td>
-                            <td>Test</td>
-                            <td>Umum</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>10/05/2003</td>
+                            <td> {{ $index2 + 1 }} </td>
+                            <td>RM - {{ $item->id }}</td>
+                            <td>{{ $item2 -> keluhan }}</td>
+                            <td> {{ $item2 -> poli -> nama }}</td>
+                            <td> {{ $item2 -> obat_id }} </td>
+                            <td> {{ $item2 -> tindakan }} </td>
+                            <td> {{ $item2 -> created_at }} </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
                   </div>
@@ -115,35 +84,81 @@
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="/editDataDokter/{{ $item -> id }}" method="POST">
+                      @csrf
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                          <input type="text" class="form-control" id="inputName2" name="nama" value="{{ $item -> nama }}" placeholder="Name">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" id="inputName2" name="email" value="{{ $item -> email }}" placeholder="">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">Poli</label>
                         <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="umum" selected>Umum</option>
-                            <option value="gigi">Gigi</option>
-                            <option value="mtbs/anak">MTBS/Anak</option>
+                        <select class="form-select" name="poli" aria-label="Default select example">
+                            <option value="{{ $item -> id }}" selected> -- {{ $item -> poli -> nama }}</option>
+                          @foreach ($data3 as $item3)
+                            <option value="{{ $item3 -> id }}">{{ $item3 -> nama }}</option>
+                          @endforeach
                         </select>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="password">
+                        <input class="form-control" type="text" placeholder="* Tekan Tombol Ubah Password Jika Ingin Mengubah Password" aria-label="Disabled input example" disabled>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Edit</button>
+                          <button type="submit" class="btn btn-warning">Edit</button>
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#delete{{ $item -> id }}" class="btn btn-danger">Hapus</button>
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#ubahPassword{{ $item -> id }}" class="btn btn-primary">Ubah Password</button>
                         </div>
                       </div>
                     </form>
+                  </div>
+                  <!-- Modal Uabh Password Dokter -->
+                  <div class="modal fade" id="ubahPassword{{ $item -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Password</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Masukkan Password Baru Anda: </p>
+                          <input class="form-control" type="text" name="password" placeholder="password" aria-label="default input example">
+                        </div>
+                        <div class="modal-footer">
+                          <a type="button" href="/ubahPassword/{{ $item -> id }}" class="btn btn-danger">Simpan</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal Hapus Akun Dokter -->
+                  <div class="modal fade" id="delete{{ $item -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Apakah anda yakin ingin menghapus akun dokter ini?
+                        </div>
+                        <div class="modal-footer">
+                          <a type="button" href="/hapusDataDokter/{{ $item -> id }}" class="btn btn-danger">Confirm</a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <!-- /.tab-pane -->
                 </div>
@@ -159,5 +174,4 @@
     </section>
     <!-- /.content -->
   </div>
-
 @endsection

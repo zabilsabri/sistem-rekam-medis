@@ -24,7 +24,7 @@
                         <tr>
                             <th style="width: 10px">No</th>
                             <th>Kode RM</th>
-                            <th>Nama</th>
+                            <th>Nama Pasien</th>
                             <th>Dokter</th>
                             <th>Keluhan</th>
                             <th>Poli</th>
@@ -32,15 +32,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($data as $index => $item)
                         <tr>
-                            <td>1</td>
-                            <td>RM-1</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Umum</td>
-                            <td>10/05/2003</td>
+                            <td> {{ $index + 1 }} </td>
+                            <td>RM - {{ $item -> id }}</td>
+                            <td> {{ $item -> pasien -> nama }} </td>
+                            <td> {{ $item -> dokter -> nama }} </td>
+                            <td> {{ $item -> keluhan }} </td>
+                            <td> {{ $item -> poli -> nama }} </td>
+                            <td> {{ $item -> created_at }} </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

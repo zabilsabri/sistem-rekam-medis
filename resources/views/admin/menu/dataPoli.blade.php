@@ -30,15 +30,60 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($data as $index => $item)
                         <tr>
-                            <td>1</td>
-                            <td>KD1</td>
-                            <td>Test</td>
+                            <td> {{ $index + 1 }} </td>
+                            <td>P - {{ $item -> id }}</td>
+                            <td> {{ $item -> nama }} </td>
                             <td>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
-                                <button type="button" class="btn btn-danger">Delete</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $item -> id }}">Edit</button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ $item -> id }}">Delete</button>
                             </td>
                         </tr>
+
+                        <!-- Modal Edit Data-->
+                        <div class="modal fade" id="edit{{ $item -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/editDataPoli/{{ $item -> id }}" method="POST">
+                                            @csrf
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Nama Poli: </label>
+                                            <input type="text" class="form-control" value="{{ $item -> nama }}" name="nama" id="exampleFormControlInput1" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Delete Data-->
+                        <div class="modal fade" id="delete{{ $item -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Data</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Apakah anda yakin ingin menghapus data ini?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a type="button" href="/deleteDataPoli/{{ $item -> id }}" class="btn btn-danger">Delete</a>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -47,32 +92,6 @@
         </div>
     </section>
 </div>
-
-<!-- Modal Edit Data-->
-<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Kode Poli: </label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nama Poli: </label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Edit</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <!-- Modal Tambah Data-->
 <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,18 +102,17 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Kode Poli: </label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
+            <form action="tambahPoli" method="POST">
+                @csrf
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nama Poli: </label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <input type="text" class="form-control" name="nama" id="exampleFormControlInput1" placeholder="">
             </div>
-      </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Edit</button>
         </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Tambah</button>
+        </div>
+        </form>
         </div>
     </div>
 </div>

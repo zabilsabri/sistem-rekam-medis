@@ -35,15 +35,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($data as $index => $item)
                         <tr>
-                            <td>1</td>
-                            <td>P1</td>
-                            <td>Test</td>
-                            <td>000000000000</td>
-                            <td>10/05/2003</td>
-                            <td>000000000000</td>
-                            <td><a class="btn btn-primary" href="rmPasien" role="button">Detail</a></td>
+                            <td>{{ $index + 1 }}</td>
+                            <td>P - {{ $item->id }}</td>
+                            <td>{{$item->nama}}</td>
+                            <td>{{ $item -> noTelp }}</td>
+                            <td>{{ $item -> tglLahir }}</td>
+                            <td>{{ $item -> nik }}</td>
+                            <td><a class="btn btn-primary" href="rmPasien/{{$item -> id}}" role="button">Detail</a></td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -62,67 +64,79 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <form action="tambahPasien" method="POST">
+        @csrf
         <div class="form-group">
             <label for="exampleInputBorder">1. Nama</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="nama" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">2. Nama Kepala Keluarga</label>
-            <input type="text" class="form-control" placeholder="">
+            <input type="text" class="form-control" name="nKepalaKeluarga" placeholder="">
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">3. Nama Ibu Kandung</label>
-            <input type="text" class="form-control" placeholder="">
+            <input type="text" class="form-control" name="nIbuKandung" placeholder="">
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">4. Kode Desa</label>
-            <input type="text" class="form-control" placeholder="">
+            <input type="text" class="form-control" name="kodeDesa" placeholder="">
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">5. NIK</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="nik" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">6. Agama</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="agama" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">7. Tgl Lahir</label>
-            <input id="startDate" class="form-control" type="date" />        
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <input type="text" class="form-control js-date" name="tglLahir" maxlength="10" />                            
+            </div>                           
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">8. Jenis Kelamin</label>
-            <input type="text" class="form-control" placeholder="">        
+            <select class="form-select" name="jk" aria-label="Default select example">
+                <option selected>Pilih Jenis Kelamin</option>
+                <option value="l">Laki - Laki</option>
+                <option value="p">Perempuan</option>
+            </select>        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">9. Status</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="status" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">10. Pekerjaan</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="pekerjaan" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">11. Alamat</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="alamat" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">12. Nomor Telpon</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="noTelp" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">13. Jenis Asuransi</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="jenisAsuransi" placeholder="">        
         </div>
         <div class="form-group">
             <label for="exampleInputBorder">14. Nomor Asuransi</label>
-            <input type="text" class="form-control" placeholder="">        
+            <input type="text" class="form-control" name="noAsuransi" placeholder="">        
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Simpan Data</button>
+        <button type="submit" class="btn btn-primary">Simpan Data</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
