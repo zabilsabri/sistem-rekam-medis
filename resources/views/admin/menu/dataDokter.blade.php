@@ -7,6 +7,14 @@
         <div class="container-fluid">
             <h2 class="text-center display-4">Daftar Dokter</h2>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
+                @foreach($errors->all() as $error)
+                <strong> {{$error}} </strong>
+                @endforeach
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @if($message = Session::get('success'))
             <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
                 <strong> {{$message}} </strong>

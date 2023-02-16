@@ -23,9 +23,11 @@ class dokterController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required',
             'poli' => 'required',
+        ], [
+            'email.unique' => 'Email Sudah Terdaftar! Gunakan Email Lain!'
         ]);
 
         $dokter = new dokter();
@@ -43,7 +45,7 @@ class dokterController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'poli' => 'required',
         ]);
 
