@@ -42,7 +42,7 @@
                             <td> {{ $item -> keluhan }} </td>
                             <td> {{ $item -> poli -> nama }} </td>
                             <td> {{ $item -> created_at }} </td>
-                            <td><a class="btn btn-primary" href="rmPasienDokter/{{$item -> id}}" role="button">Detail</a></td>
+                            <td><a class="btn btn-primary" href="rmPasienDokter/{{$item -> pasien -> id}}" role="button">Detail</a></td>
                         </tr>
                         @endforeach
                     </tbody>

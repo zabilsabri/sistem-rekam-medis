@@ -31,6 +31,11 @@ class keluhan extends Model
     	return $this->belongsTo('App\Models\icd10');
     }
 
+    public function obat()
+    {
+    	return $this->belongsToMany('App\Models\obat');
+    }
+
     public function getCreatedAtAttribute($value){
         return Carbon::parse($value)->format('d/m/Y');
     }

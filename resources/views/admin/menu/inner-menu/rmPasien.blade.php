@@ -81,7 +81,7 @@
                     <span>Jenis Asuransi</span> <b class="float-right">{{ $item -> jenis_asuransi }}</b>
                   </li>
                   <li class="list-group-item">
-                    <span>No. Asuransi</span> <b class="float-right"> {{ $item -> no_kartu }} </b>
+                    <span>No. Asuransi</span> <b class="float-right"> {{ $item -> no_kartu ?? '-' }} </b>
                   </li>
                 </ul>
                 <a class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#editDataPasien{{ $item->id }}"><b>Edit</b></a>
@@ -278,7 +278,15 @@
                             <td> {{ $item2 -> keluhan }} </td>
                             <td>{{ $item2 -> poli -> nama}}</td>
                             <td>{{ $item2 -> icd10 -> nama ?? '-' }}</td>
-                            <td> {{ $item2 -> obat_id ?? '-'}} </td>
+                            <td> 
+                              <ul style="padding-left: 20px;">
+                                @foreach($item2->obat as $o)
+                                <li>
+                                  {{ $o -> nama ?? '-' }}
+                                </li>
+                                @endforeach
+                              </ul>
+                            </td>
                             <td> {{ $item2 -> tindakan ?? '-'}} </td>
                             <td> {{ $item2 -> created_at }} </td>
                             <td>

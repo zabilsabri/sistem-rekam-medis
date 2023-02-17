@@ -80,6 +80,8 @@ Route::group(['middleware' => ['auth', 'hakAkses:dokter']], function(){
     // Data Pasien
     Route::get('riwayatMedisDokter', [pasienController::class , 'rmDokter']);
     Route::get('rmPasienDokter/{id}', [pasienController::class, 'detailDokter']);
+    Route::get('editRMDokter/{id}/{pId}', [pasienController::class , 'editRMDokter']);
+    Route::get('editObatDokter/{id}/{pId}', [pasienController::class , 'editObatDokter']);
 
 });
 

@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\pasien;
 use App\Models\obat;
 use App\Models\poli;
+use App\Models\icd10;
 use App\Models\keluhan;
+use App\Models\obat_keluhan;
 use App\Models\dokter;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -118,10 +120,12 @@ class pasienController extends Controller
         $data = pasien::where('id','=', $id)->get();
         $data2 = keluhan::where('pasien_id', '=', $id)->get();
         $data3 = obat::get();
+        $data4 = icd10::get(); 
         return view('dokter.menu.inner-menu.rmPasien')
             ->with(compact('data'))
             ->with(compact('data2'))
-            ->with(compact('data3'));
+            ->with(compact('data3'))
+            ->with(compact('data4'));
         }
 
 
@@ -178,6 +182,36 @@ class pasienController extends Controller
         $keluhan->save();
 
         return redirect()->to('/rmPasien/'.$pId)->send()->with('success', 'Riwayat Medis Pasien Berhasil Diedit!');
+    }
+
+    public function editRMDokter(Request $request, $id, $pId)
+    {
+        $request->validate([
+            'tindakan' => 'required',
+        ]);
+
+        $keluhan = keluhan::find($id);
+        $keluhan->tindakan = $request->tindakan;
+        $keluhan->icd10_id = $request->icd10;
+        $keluhan->save();
+
+        return redirect()->to('/rmPasienDokter/'.$pId)->send()->with('success', 'Riwayat Medis Pasien Berhasil Diedit!');
+    }
+
+    public function editObatDokter(Request $request, $id, $pId)
+    {
+        $obat =  $request->input('obat_id', []);
+
+        foreach ($obat as $index => $value) {
+            $units[] = [
+                "keluhan_id" => $id,
+                "obat_id" => $obat[$index],
+            ];
+        }
+
+        $created = obat_keluhan::insert($units);
+  
+        return redirect()->to('/rmPasienDokter/'.$pId)->send()->with('success', 'Riwayat Medis Pasien Berhasil Diedit!');
     }
 
     public function hapusRM($id)

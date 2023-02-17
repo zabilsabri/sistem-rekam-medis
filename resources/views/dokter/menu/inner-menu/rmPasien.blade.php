@@ -5,7 +5,6 @@
 <script src="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/jquery.bootstrap-duallistbox.js"></script>
 <link rel="stylesheet" type="text/css" href="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/bootstrap-duallistbox.css">
 
-
 <div class="content-wrapper" style="min-height: 1604.8px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -86,7 +85,7 @@
                     <span>Jenis Asuransi</span> <b class="float-right">{{ $item -> jenis_asuransi }}</b>
                   </li>
                   <li class="list-group-item">
-                    <span>No. Asuransi</span> <b class="float-right"> {{ $item -> no_kartu }} </b>
+                    <span>No. Asuransi</span> <b class="float-right"> {{ $item -> no_kartu ?? '-' }} </b>
                   </li>
                 </ul>
 
@@ -218,109 +217,87 @@
                             <td> {{ $item2 -> keluhan }} </td>
                             <td>{{ $item2 -> poli -> nama}}</td>
                             <td> {{ $item2 -> icd10 -> nama ?? '-' }}</td>
-                            <td> {{ $item2 -> obat_id ?? '-'}} </td>
+                            <td> 
+                              <ul style="padding-left: 20px;">
+                                @foreach($item2->obat as $o)
+                                <li>
+                                  {{ $o -> nama ?? '-' }}
+                                </li>
+                                @endforeach
+                              </ul>
+                              @empty($o)
+                              @if(Auth::user()->id == $item2 -> dokter -> id)
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#obat{{ $item2 -> id }}">+</button>
+                              @endif
+                              @endempty
+                            </td>
                             <td> {{ $item2 -> tindakan ?? '-'}} </td>
                             <td> {{ $item2 -> created_at }} </td>
                             <td>
+                              @if(Auth::user()->id == $item2 -> dokter -> id)
                               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $item2 -> id }}">Edit</button>
+                              @endif
                             </td>
                         </tr>
-                        <!-- Modal Edit Data-->
-                        <div class="modal fade" id="edit{{ $item2 -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Riwayat Medis</h1>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action=" /editRM/{{ $item2 -> id }}/{{ $item -> id }}">
-                                    <div class="form-group">
-                                        <label for="exampleInputBorder">1. Tindakan</label>
-                                        <input type="text" class="form-control" value="{{ $item2 -> tindakan }}" name="tindakan" placeholder="">        
-                                    </div>
-                                    <!-- using https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox -->
 
-                                      <!-- common libraries -->
-                                      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-                                      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-                                      <!-- plugin -->
-                                      <script src="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/jquery.bootstrap-duallistbox.js"></script>
-
-                                      <link rel="stylesheet" type="text/css" href="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/bootstrap-duallistbox.css">
-
-                                      <style>
-                                        .moveall,
-                                        .removeall {
-                                          border: 1px solid #ccc !important;
-                                          
-                                          &:hover {
-                                            background: #efefef;
-                                          }
-                                        }
-
-                                        .moveall::after {
-                                          content: attr(title);
-                                          
-                                        }
-
-                                        .removeall::after {
-                                          content: attr(title);
-                                        }
-                                        .form-control option {
-                                            padding: 10px;
-                                            border-bottom: 1px solid #efefef;
-                                        }
-                                      </style>
-
-                                      <!-- Demo -->
-                                      <div class="container">
-                                        <div class="row" style="margin-bottom: 40px;">
-                                          <div class="col">
-                                            <form id="demoform">
-                                              <select multiple="multiple" size="10" name="duallistbox_demo1[]" title="duallistbox_demo1[]">
-                                                <option value="payee1">Aviva Insurance - Business - 987654</option>
-                                                <option value="payee2">Bell Mobility - 66853 (John Smith)</option>
-                                                <option value="payee3">Bell Mobility - 75432 (Jane Smith)</option>
-                                                <option value="payee4">Bell Mobility - 98765 (Jim Smith)</option>
-                                                <option value="payee5">Canadian Tire Commercial Mastercard - **** 5525</option>
-                                                <option value="payee6">Canadian Tire Mastercard - **** 3158 (President's Card)</option>
-                                                <option value="payee7">FedEx Express Canada - 54321</option>
-                                                <option value="payee8">Lowes Canada - 12345</option>
-                                                <option value="payee9">Mastercard, PC Financial - **** 5535</option>
-                                                <option value="payee10">Qtrade Investor - 12345</option>
-                                                <option value="payee11" selected="selected">Servus Mastercard - **** 5545</option>
-                                                <option value="payee12">Telus - 123456787 (Calagary  Office)</option>
-                                                <option value="payee13">Telus - 123456788 (Edmonton NW Office)</option>
-                                                <option value="payee14">Telus - 123456789 (Edmonton SE Office)</option>
-                                              </select>
-                                              <br>
-                                            </form>
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <script>
-                                        var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({
-                                          nonSelectedListLabel: 'Obat',
-                                          selectedListLabel: 'Obat Yang Terpilih',
-                                          preserveSelectionOnMove: 'moved',
-                                          moveAllLabel: 'Move all',
-                                          removeAllLabel: 'Remove all'
-                                        });
-                                        $("#demoform").submit(function() {
-                                          alert($('[name="duallistbox_demo1[]"]').val());
-                                          return false;
-                                        });
-                                      </script>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
-                                </form>
+                        
+                        <!-- Modal Edit Obat -->
+                        <div class="modal fade" id="obat{{ $item2 -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
+                              <div class="modal-body">
+                                <form action="/editObatDokter/{{ $item2 -> id }}/{{ $item -> id }}">
+                                <div class="form-group">
+                                  <label for="exampleInputBorder">1. Obat</label>
+                                  <select class="js-example-basic-multiple" name="obat_id[]" multiple="multiple">
+                                    @foreach($data3 as $item3)
+                                    <option value="{{ $item3 -> id }}">{{$item3 -> nama}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                              </div>
+                              </form>
                             </div>
+                          </div>
+                        </div>
+
+                        <!-- Modal Edit Data-->
+                          <div class="modal fade" id="edit{{ $item2 -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Riwayat Medis</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action=" /editRMDokter/{{ $item2 -> id }}/{{ $item -> id }}">
+                                      <div class="form-group">
+                                          <label for="exampleInputBorder">1. Tindakan</label>
+                                          <input type="text" class="form-control" value="{{ $item2 -> tindakan }}" name="tindakan" placeholder="">        
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputBorder">2. ICD 10</label>
+                                        <select class="form-select" name="icd10" aria-label="Default select example">
+                                          <option selected>Pilih ICD 10</option>
+                                          @foreach($data4 as $item4)
+                                          <option value="{{ $item4 -> id ?? '-'}}">{{$item4 -> nama ?? 'Empty'}}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                      </div>
+                                  </form>
+                                </div>
+                              </div>
                           </div>
                         @endforeach
                     </tbody>
