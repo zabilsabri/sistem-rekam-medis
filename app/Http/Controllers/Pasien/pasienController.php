@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Pasien;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\pasien;
+use App\Models\obat;
 use App\Models\poli;
 use App\Models\keluhan;
 use App\Models\dokter;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class pasienController extends Controller
 {
@@ -111,6 +113,17 @@ class pasienController extends Controller
             ->with(compact('data4'));
     }
 
+    public function detailDokter($id)
+    {
+        $data = pasien::where('id','=', $id)->get();
+        $data2 = keluhan::where('pasien_id', '=', $id)->get();
+        $data3 = obat::get();
+        return view('dokter.menu.inner-menu.rmPasien')
+            ->with(compact('data'))
+            ->with(compact('data2'))
+            ->with(compact('data3'));
+        }
+
 
     public function hapus($id)
     {
@@ -122,6 +135,13 @@ class pasienController extends Controller
     {
         $data = keluhan::get();
         return view('admin.menu.riwayatMedis')
+            ->with(compact('data'));
+    }
+
+    public function rmDokter()
+    {
+        $data = keluhan::where('dokter_id', '=', Auth::user()->id)->get();
+        return view('dokter.menu.riwayatMedis')
             ->with(compact('data'));
     }
 

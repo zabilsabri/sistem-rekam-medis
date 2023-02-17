@@ -26,6 +26,11 @@ class keluhan extends Model
     	return $this->belongsTo('App\Models\pasien');
     }
 
+    public function icd10()
+    {
+    	return $this->belongsTo('App\Models\icd10');
+    }
+
     public function getCreatedAtAttribute($value){
         return Carbon::parse($value)->format('d/m/Y');
     }

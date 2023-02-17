@@ -76,7 +76,10 @@ Route::group(['middleware' => ['auth', 'hakAkses:admin']], function(){
 });
 
 Route::group(['middleware' => ['auth', 'hakAkses:dokter']], function(){
-    
+
+    // Data Pasien
+    Route::get('riwayatMedisDokter', [pasienController::class , 'rmDokter']);
+    Route::get('rmPasienDokter/{id}', [pasienController::class, 'detailDokter']);
 
 });
 

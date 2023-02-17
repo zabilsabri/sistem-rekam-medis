@@ -47,6 +47,8 @@ class dokterController extends Controller
             'nama' => 'required',
             'email' => 'required|unique:users',
             'poli' => 'required',
+        ], [
+            'email.unique' => 'Email Sudah Terdaftar! Gunakan Email Lain!'
         ]);
 
         $dokter = dokter::find($id);

@@ -17,7 +17,11 @@ class loginController extends Controller
         ]);
 
         if(Auth::attempt($request->only('email', 'password'))){
-            return redirect('kunjunganPasien');
+            if (Auth::user()->jabatan == 'admin') {
+                return redirect('kunjunganPasien');
+            } else if (Auth::user()->jabatan == 'dokter'){
+                return redirect('riwayatMedisDokter');
+            }
         }else{
             dd($request->all());
         }

@@ -102,7 +102,7 @@
                         <label for="inputName2" class="col-sm-2 col-form-label">Poli</label>
                         <div class="col-sm-10">
                         <select class="form-select" name="poli" aria-label="Default select example">
-                            <option value="{{ $item -> id }}" selected> -- {{ $item -> poli -> nama }}</option>
+                            <option value="{{ $item -> poli -> id }}" selected> -- {{ $item -> poli -> nama }}</option>
                           @foreach ($data3 as $item3)
                             <option value="{{ $item3 -> id }}">{{ $item3 -> nama }}</option>
                           @endforeach
