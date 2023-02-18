@@ -30,7 +30,7 @@ class pasienController extends Controller
             'nKepalaKeluarga' => 'required',
             'nIbuKandung' => 'required',
             'kodeDesa' => 'required',
-            'nik' => 'required',
+            'nik' => 'required|unique:pasiens',
             'agama' => 'required',
             'tglLahir' => 'required',
             'jk' => 'required',
@@ -39,6 +39,8 @@ class pasienController extends Controller
             'alamat' => 'required',
             'noTelp' => 'required',
             'jenisAsuransi' => 'required',
+        ], [
+            'nik.unique' => 'NIK Sudah Terdaftar!'
         ]);
 
         $pasien = new pasien();
@@ -69,7 +71,7 @@ class pasienController extends Controller
             'nKepalaKeluarga' => 'required',
             'nIbuKandung' => 'required',
             'kodeDesa' => 'required',
-            'nik' => 'required',
+            'nik' => 'required|unique:pasiens',
             'agama' => 'required',
             'tglLahir' => 'required',
             'jk' => 'required',
@@ -78,6 +80,8 @@ class pasienController extends Controller
             'alamat' => 'required',
             'noTelp' => 'required',
             'jenisAsuransi' => 'required',
+        ], [
+            'nik.unique' => 'NIK Sudah Terdaftar!'
         ]);
 
         $pasien = pasien::find($id);
@@ -132,7 +136,7 @@ class pasienController extends Controller
     public function hapus($id)
     {
         $deleted = DB::table('pasiens')->where('id','=', $id)->delete();
-        return redirect()->to('/dataPasien')->send()->with('success', 'Data Pasien Berhasil Di Hapus!');
+        return redirect()->to('/kunjunganPasien')->send()->with('success', 'Data Pasien Berhasil Di Hapus!');
     }
 
     public function rm()

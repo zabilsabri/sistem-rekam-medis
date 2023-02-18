@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
             </div>
         </form>
         </div>

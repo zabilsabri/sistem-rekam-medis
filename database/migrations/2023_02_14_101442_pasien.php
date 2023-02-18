@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nKepalaKeluarga');
             $table->string('nIbuKandung');
             $table->string('kode_desa');
-            $table->string('nik');
+            $table->string('nik')->unique();
             $table->string('agama');
             $table->date('tglLahir');
             $table->char('jk'); //Jenis Kelamin

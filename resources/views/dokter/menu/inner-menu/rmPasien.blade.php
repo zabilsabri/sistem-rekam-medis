@@ -286,7 +286,7 @@
                                       <div class="form-group">
                                         <label for="exampleInputBorder">2. ICD 10</label>
                                         <select class="form-select" name="icd10" aria-label="Default select example">
-                                          <option selected>Pilih ICD 10</option>
+                                          <option value="" selected>Pilih ICD 10</option>
                                           @foreach($data4 as $item4)
                                           <option value="{{ $item4 -> id ?? '-'}}">{{$item4 -> nama ?? 'Empty'}}</option>
                                           @endforeach

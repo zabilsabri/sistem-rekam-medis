@@ -71,7 +71,15 @@
                             <td>RM - {{ $item->id }}</td>
                             <td>{{ $item2 -> keluhan }}</td>
                             <td> {{ $item2 -> poli -> nama }}</td>
-                            <td> {{ $item2 -> obat_id }} </td>
+                            <td>
+                              <ul style="padding-left: 20px;">
+                                @foreach($item2->obat as $o)
+                                <li>
+                                  {{ $o -> nama ?? '-' }}
+                                </li>
+                                @endforeach
+                              </ul>
+                            </td>
                             <td> {{ $item2 -> tindakan }} </td>
                             <td> {{ $item2 -> created_at }} </td>
                         </tr>
