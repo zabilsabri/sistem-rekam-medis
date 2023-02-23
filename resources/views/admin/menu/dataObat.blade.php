@@ -5,7 +5,7 @@
     <!-- Main content -->
     <section class="content p-4">
         <div class="container-fluid">
-            <h2 class="text-center display-4">Daftar Obat</h2>
+            <h2 class="text-center display-4 fw-bold">Daftar Obat</h2>
         </div>
         @if($message = Session::get('success'))
             <div class="alert alert-success alert-dismissible fade show w-100" role="alert">

@@ -23,7 +23,7 @@ class loginController extends Controller
                 return redirect('riwayatMedisDokter');
             }
         }else{
-            dd($request->all());
+            return redirect()->to('/')->send()->with('failed', 'Email Atau Password Anda Salah!');
         }
     }
 

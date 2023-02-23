@@ -5,7 +5,7 @@
     <!-- Main content -->
     <section class="content p-4">
         <div class="container-fluid">
-            <h2 class="text-center display-4">Daftar Pasien</h2>
+            <h2 class="text-center display-4 fw-bold">Daftar Pasien</h2>
         </div>
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">

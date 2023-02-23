@@ -13,18 +13,30 @@
   <link rel="stylesheet" href="{{asset('AdminLTE-3.2.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('AdminLTE-3.2.0/dist/css/adminlte.min.css')}}">
+
 </head>
 <!-- Page Second Navigation -->
 <body class="login-page" style="min-height: 496.8px;">
 <div class="login-box">
   <div class="login-logo">
+    <div class="logo-app">
+      <img src="{{ asset('image/Logo-Luwu-Timur.png') }}" width="65px" alt="logo luwu timur">
+      <img src="{{ asset('image/logo-puskesmas.png') }}" style="margin-left: 15px" width="65px" alt="logo puskesmas">
+    </div>
     <a href="/"><b>Puskesmas</b> Wasuponda</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
+      <p class="login-box-msg">Masukkan Akun Anda</p>
+      @if($message = Session::get('failed'))
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong> {{ $message }} </strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true" >&times;</span>
+        </button>
+      </div>
+      @endif
       <form action="loginProcess" method="post">
       @csrf
         <div class="input-group mb-3">
@@ -58,11 +70,11 @@
 <!-- /.login-box -->
 
   <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ asset ('AdminLTE-3.2.0/plugins/jquery/jquery.min.js')}}"></script>
+  <!-- Bootstrap -->
+  <script src="{{ asset('AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js"></script>
+  <script src="{{ asset ('AdminLTE-3.2.0/dist/js/adminlte.min.js')}}"></script>  
 
 
 </body>

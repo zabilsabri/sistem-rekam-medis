@@ -72,9 +72,10 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a class="brand-link">
-      <span class="brand-text font-weight-light">Puskesmas Wasuponda</span>
-    </a>
+    <span class="brand-link">
+      <img class="brand-text" style="padding-left: 12px;" src="{{ asset('image/Logo-Luwu-Timur.png') }}" width="42px" alt="logo luwu timur">
+      <span class="brand-text font-weight-light fs-6">Puskesmas Wasuponda</span>
+    </span>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -84,7 +85,7 @@
         <img src="{{ asset('image/dAvatar.png') }}" alt="User profile picture" class="img-circle elevation-2">
         </div>
         <div class="info">
-          <a class="d-block">{{Auth::user()->nama}}</a>
+          <span class="text-light d-block">{{Auth::user()->nama}}</span>
         </div>
       </div>
 
