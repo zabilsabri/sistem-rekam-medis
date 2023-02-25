@@ -25,7 +25,6 @@
                             <th style="width: 10px">No</th>
                             <th>Kode RM</th>
                             <th>Nama Pasien</th>
-                            <th>Dokter</th>
                             <th>Keluhan</th>
                             <th>Poli</th>
                             <th>Tgl Berobat</th>
@@ -38,7 +37,6 @@
                             <td> {{ $index + 1 }} </td>
                             <td>RM - {{ $item -> id }}</td>
                             <td> {{ $item -> pasien -> nama }} </td>
-                            <td> {{ $item -> dokter -> nama }} </td>
                             <td> {{ $item -> keluhan }} </td>
                             <td> {{ $item -> poli -> nama }} </td>
                             <td> {{ $item -> created_at }} </td>

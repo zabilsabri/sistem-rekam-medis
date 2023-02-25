@@ -12,11 +12,11 @@ class poli extends Model
 
     public function dokter()
     {
-    	return $this->hasOne('App\Models\dokter');
+    	return $this->hasMany('App\Models\dokter');
     }
 
     public function keluhan()
     {
-    	return $this->hasOne('App\Models\keluhan');
+    	return $this->hasMany('App\Models\keluhan');
     }
 }

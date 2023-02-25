@@ -17,6 +17,6 @@ class dokter extends Model
 
     public function keluhan()
     {
-    	return $this->hasOne('App\Models\keluhan');
+    	return $this->hasMany('App\Models\keluhan');
     }
 }

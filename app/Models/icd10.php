@@ -11,6 +11,6 @@ class icd10 extends Model
 
     public function keluhan()
     {
-    	return $this->hasOne('App\Models\keluhan');
+    	return $this->hasMany('App\Models\keluhan');
     }
 }
