@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 18, 2023 at 11:33 AM
+-- Host: localhost
+-- Generation Time: Feb 26, 2023 at 08:12 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -276,10 +276,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `jabatan`, `poli_id`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$hJXM1VX4m/OgW8vmnHqrs.oB0g4VKzh1TeAe41mEuiyNd6zziq1ty', 'admin', NULL, NULL, NULL),
-(2, 'Dr. Dasril', 'dasril@gmail.com', '$2y$10$S0yXEzAX7/u9uKfv7tQx0Ou/N19EJuD7Ig9qkwa8SF51bp2gSPtCC', 'dokter', 3, '2023-02-18 02:09:51', '2023-02-18 02:09:51'),
-(3, 'Drg. Heri', 'heri@gmail.com', '$2y$10$7GnfhVApGShUXEiOPciAy.xJlhU63fbiXLHmfMguu80xpkrMT/K4C', 'dokter', 2, '2023-02-18 02:10:05', '2023-02-18 02:10:05'),
-(4, 'Dr. Toto', 'toto@gmail.com', '$2y$10$gIQdRUm0drnce9XNdDHZ4.B9eXukXmgucZhSGkRrS.hqNlKME/sw.', 'dokter', 1, '2023-02-18 02:10:39', '2023-02-18 02:10:39');
+(1, 'admin', 'admpuskesmaswp@gmail.com', '$2y$10$hJXM1VX4m/OgW8vmnHqrs.oB0g4VKzh1TeAe41mEuiyNd6zziq1ty', 'admin', NULL, NULL, NULL),
+(2, 'Dr. Dasril', 'dasriltribula@gmail.com', '$2y$10$S0yXEzAX7/u9uKfv7tQx0Ou/N19EJuD7Ig9qkwa8SF51bp2gSPtCC', 'dokter', 3, '2023-02-18 02:09:51', '2023-02-18 02:09:51'),
+(3, 'Drg. Heri', 'herikinanjar10@gmail.com', '$2y$10$7GnfhVApGShUXEiOPciAy.xJlhU63fbiXLHmfMguu80xpkrMT/K4C', 'dokter', 2, '2023-02-18 02:10:05', '2023-02-18 02:10:05'),
+(4, 'Dr. Toto', 'totomusharif@gmail.com', '$2y$10$gIQdRUm0drnce9XNdDHZ4.B9eXukXmgucZhSGkRrS.hqNlKME/sw.', 'dokter', 1, '2023-02-18 02:10:39', '2023-02-18 02:10:39');
 
 --
 -- Indexes for dumped tables
