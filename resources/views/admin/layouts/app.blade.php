@@ -41,7 +41,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="{{asset('AdminLTE-3.2.0/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__wobble" src="{{asset('image/Logo-Luwu-Timur.png')}}" alt="" height="70" width="60">
   </div>
 
   <!-- Navbar -->
@@ -82,7 +82,7 @@
         <img src="{{ asset('image/aAvatar.png') }}" alt="User profile picture" class="img-circle elevation-2">
         </div>
         <div class="info">
-          <span class="d-block text-light">{{ strtoupper(Auth::user()->nama)}}</span>
+          <a href="{{ route('profil.admin') }}" class="d-block text-light">{{ strtoupper(Auth::user()->nama)}}</a>
         </div>
       </div>
 

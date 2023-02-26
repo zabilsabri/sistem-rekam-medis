@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\loginController;
+use App\Http\Controllers\Auth\forgetPasswordController;
 use App\Http\Controllers\Pasien\pasienController;
 use App\Http\Controllers\Dokter\dokterController;
+use App\Http\Controllers\Admin\adminController;
 use App\Http\Controllers\Poli\poliController;
 use App\Http\Controllers\Obat\obatController;
 use App\Http\Controllers\ICD10\icd10Controller;
@@ -27,6 +29,11 @@ Route::get('/', function () {
 Route::post('loginProcess', [loginController::class , 'login']);
 Route::get('/logout', [loginController::class , 'logout']);
 
+// Forget Password
+Route::get('/forget-password', [forgetPasswordController::class , 'index'])->name('forget-password');
+Route::post('request-process', [forgetPasswordController::class , 'forgetPasswordRequest'])->name('forgetPassword.request.post');
+Route::get('/change-password/{token}', [forgetPasswordController::class , 'indexResetPasswordForm'])->name('forgetPassword.link.get');
+Route::post('change-process', [forgetPasswordController::class , 'resetPasswordForm'])->name('forgetPassword.link.post');
 
 
 Route::group(['middleware' => ['auth', 'hakAkses:admin']], function(){
@@ -72,6 +79,11 @@ Route::group(['middleware' => ['auth', 'hakAkses:admin']], function(){
     Route::get('editRM/{id}/{pId}', [pasienController::class , 'editRM']);
     Route::get('hapusRM/{id}', [pasienController::class , 'hapusRM']);
 
+    // Profil Admin
+    Route::get('/profil-admin', [adminController::class , 'showProfileAdmin'])->name('profil.admin');
+    Route::post('/editDataAdmin/{id}', [adminController::class , 'edit'])->name('edit.profil.admin');
+    Route::get('/ubahPasswordAdmin/{id}', [adminController::class , 'ubahPassword']);
+
 
 });
 
@@ -82,6 +94,12 @@ Route::group(['middleware' => ['auth', 'hakAkses:dokter']], function(){
     Route::get('rmPasienDokter/{id}', [pasienController::class, 'detailDokter']);
     Route::get('editRMDokter/{id}/{pId}', [pasienController::class , 'editRMDokter']);
     Route::get('editObatDokter/{id}/{pId}', [pasienController::class , 'editObatDokter']);
+
+    // Profil
+    Route::get('/profil-dokter', [dokterController::class , 'showProfileDokter'])->name('profil.dokter');
+    Route::post('/editDataDokterD/{id}', [dokterController::class , 'editD'])->name('edit.profil.dokter');
+    Route::get('/ubahPasswordD/{id}', [dokterController::class , 'ubahPasswordD']);
+
 
 });
 
