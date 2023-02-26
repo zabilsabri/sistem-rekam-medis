@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 
 class pasienController extends Controller
 {
+
+    // Interaksi Admin Ke Pasien
+
     public function show()
     {
         $data = pasien::get();
@@ -71,7 +74,7 @@ class pasienController extends Controller
             'nKepalaKeluarga' => 'required',
             'nIbuKandung' => 'required',
             'kodeDesa' => 'required',
-            'nik' => 'required|unique:pasiens',
+            'nik' => 'required|unique:pasiens,nik,'.$id,
             'agama' => 'required',
             'tglLahir' => 'required',
             'jk' => 'required',
@@ -119,20 +122,6 @@ class pasienController extends Controller
             ->with(compact('data4'));
     }
 
-    public function detailDokter($id)
-    {
-        $data = pasien::where('id','=', $id)->get();
-        $data2 = keluhan::where('pasien_id', '=', $id)->get();
-        $data3 = obat::get();
-        $data4 = icd10::get(); 
-        return view('dokter.menu.inner-menu.rmPasien')
-            ->with(compact('data'))
-            ->with(compact('data2'))
-            ->with(compact('data3'))
-            ->with(compact('data4'));
-        }
-
-
     public function hapus($id)
     {
         $deleted = DB::table('pasiens')->where('id','=', $id)->delete();
@@ -143,13 +132,6 @@ class pasienController extends Controller
     {
         $data = keluhan::get();
         return view('admin.menu.riwayatMedis')
-            ->with(compact('data'));
-    }
-
-    public function rmDokter()
-    {
-        $data = keluhan::where('dokter_id', '=', Auth::user()->id)->get();
-        return view('dokter.menu.riwayatMedis')
             ->with(compact('data'));
     }
 
@@ -188,6 +170,29 @@ class pasienController extends Controller
         return redirect()->to('/rmPasien/'.$pId)->send()->with('success', 'Riwayat Medis Pasien Berhasil Diedit!');
     }
 
+
+    // Interaksi Dokter Ke Pasien
+
+    public function detailDokter($id)
+    {
+        $data = pasien::where('id','=', $id)->get();
+        $data2 = keluhan::where('pasien_id', '=', $id)->get();
+        $data3 = obat::get();
+        $data4 = icd10::get(); 
+        return view('dokter.menu.inner-menu.rmPasien')
+            ->with(compact('data'))
+            ->with(compact('data2'))
+            ->with(compact('data3'))
+            ->with(compact('data4'));
+    }
+
+    public function rmDokter()
+    {
+        $data = keluhan::where('dokter_id', '=', Auth::user()->id)->whereNull('tindakan')->get();
+        return view('dokter.menu.riwayatMedis')
+            ->with(compact('data'));
+    }
+
     public function editRMDokter(Request $request, $id, $pId)
     {
         $request->validate([
@@ -201,6 +206,7 @@ class pasienController extends Controller
 
         return redirect()->to('/rmPasienDokter/'.$pId)->send()->with('success', 'Riwayat Medis Pasien Berhasil Diedit!');
     }
+
 
     public function editObatDokter(Request $request, $id, $pId)
     {

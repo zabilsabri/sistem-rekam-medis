@@ -15,6 +15,20 @@
 
     <!-- Main content -->
     <section class="content">
+      @if ($errors->any())
+          <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+              @foreach($errors->all() as $error)
+              <strong> {{$error}} </strong>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+      @if($message = Session::get('success'))
+          <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
+              <strong> {{$message}} </strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
@@ -142,11 +156,13 @@
                         </div>
                         <div class="modal-body">
                           <p>Masukkan Password Baru Anda: </p>
+                          <form action="/ubahPassword/{{ $item -> id }}">
                           <input class="form-control" type="text" name="password" placeholder="password" aria-label="default input example">
                         </div>
                         <div class="modal-footer">
-                          <a type="button" href="/ubahPassword/{{ $item -> id }}" class="btn btn-danger">Simpan</a>
+                          <button type="submit" class="btn btn-danger">Simpan</button>
                         </div>
+                        </form>
                       </div>
                     </div>
                   </div>
