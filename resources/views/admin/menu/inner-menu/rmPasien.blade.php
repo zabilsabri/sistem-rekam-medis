@@ -9,18 +9,26 @@
             <div class="col-sm-6">
                 <h1>Profil Pasien</h1>
             </div>
-            @if($message = Session::get('success'))
-            <div class="alert alert-success alert-dismissible fade show w-100 mt-3" role="alert">
-                <strong> {{$message}} </strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
+      @if ($errors->any())
+          <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+              @foreach($errors->all() as $error)
+              <strong> {{$error}} </strong>
+              @endforeach
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+      @if($message = Session::get('success'))
+      <div class="alert alert-success alert-dismissible fade show w-100 mt-3" role="alert">
+          <strong> {{$message}} </strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">

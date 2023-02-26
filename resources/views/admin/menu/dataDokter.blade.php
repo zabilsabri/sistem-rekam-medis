@@ -8,7 +8,7 @@
             <h2 class="text-center display-4 fw-bold">Daftar Dokter</h2>
         </div>
         @if ($errors->any())
-            <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
                 @foreach($errors->all() as $error)
                 <strong> {{$error}} </strong>
                 @endforeach

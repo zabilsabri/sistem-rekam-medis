@@ -225,11 +225,7 @@
                                 </li>
                                 @endforeach
                               </ul>
-                              @empty($o)
-                              @if(Auth::user()->id == $item2 -> dokter -> id)
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#obat{{ $item2 -> id }}">+</button>
-                              @endif
-                              @endempty
+                              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#obat{{ $item2 -> id }}">+</button>
                             </td>
                             <td> {{ $item2 -> tindakan ?? '-'}} </td>
                             <td> {{ $item2 -> created_at }} </td>
