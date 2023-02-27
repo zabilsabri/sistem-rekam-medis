@@ -20,11 +20,13 @@ class icd10Controller extends Controller
     {
         $request->validate([
             'kode' => 'required',
+            'subkode' => 'required',
             'deskripsi' => 'required',
         ]);
 
         $icd10 = new icd10();
         $icd10->nama = $request->kode;
+        $icd10->subnama = $request->subkode;
         $icd10->deskripsi = $request->deskripsi;
         $icd10->save();
 
@@ -35,11 +37,13 @@ class icd10Controller extends Controller
 
         $request->validate([
             'kode' => 'required',
+            'subkode' => 'required',
             'deskripsi' => 'required',
         ]);
 
         $icd10 = icd10::find($id);
         $icd10->nama = $request->kode;
+        $icd10->subnama = $request->subkode;
         $icd10->deskripsi = $request->deskripsi;
         $icd10->save();
 

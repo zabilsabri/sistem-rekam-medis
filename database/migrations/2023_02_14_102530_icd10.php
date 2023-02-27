@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('icd10s', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('subnama');
             $table->string('deskripsi');
             $table->timestamps();
         });

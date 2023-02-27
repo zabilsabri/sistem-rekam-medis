@@ -25,6 +25,7 @@
                         <tr>
                             <th style="width: 10px">No</th>
                             <th>Kode</th>
+                            <th>Sub-Kode</th>
                             <th>Diagnosa</th>
                             <th style="width: 130px">Details</th>
                         </tr>
@@ -34,6 +35,7 @@
                         <tr>
                             <td> {{ $index + 1 }} </td>
                             <td>{{ $item -> nama }}</td>
+                            <td>{{ $item -> subnama ?? ""}}</td>
                             <td>{{ $item -> deskripsi }}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $item -> id }}">Edit</button>
@@ -54,9 +56,13 @@
                                             <label for="exampleFormControlInput1" class="form-label">Kode ICD 10: </label>
                                             <input type="text" class="form-control" id="exampleFormControlInput1" name="kode" value="{{ $item -> nama }}" placeholder="">
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Sub Kode ICD 10: </label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" name="subkode" value="{{ $item -> subnama ?? '-' }}" placeholder="">
+                                        </div>
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="floatingInputValue" name="deskripsi" placeholder="{{ $item -> deskripsi }}" value="{{ $item -> deskripsi }}">
-                                            <label for="floatingInputValue">Deskripsi: </label>
+                                            <label for="floatingInputValue">Diagnosa: </label>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -90,8 +96,7 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
-            
+            <!-- /.card-body -->      
         </div>
     </section>
 </div>
@@ -112,9 +117,13 @@
                     <label for="exampleFormControlInput1" class="form-label">Kode ICD 10: </label>
                     <input type="text" class="form-control" name="kode" id="exampleFormControlInput1" placeholder="">
                 </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Sub Kode ICD 10: </label>
+                    <input type="text" class="form-control" name="subkode" id="exampleFormControlInput1" placeholder="">
+                </div>
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" name="deskripsi" id="floatingTextarea" style="height: 100px"></textarea>
-                    <label for="floatingTextarea">Deskripsi: </label>
+                    <label for="floatingTextarea">Diagnosa: </label>
                 </div>
             </div>
             <div class="modal-footer">

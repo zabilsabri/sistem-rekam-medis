@@ -216,7 +216,7 @@
                             <td> RM - {{ $item2 -> id }} </td>
                             <td> {{ $item2 -> keluhan }} </td>
                             <td>{{ $item2 -> poli -> nama}}</td>
-                            <td> {{ $item2 -> icd10 -> nama ?? '-' }}</td>
+                            <td> {{ $item2 -> icd10 -> nama ?? '-' }} ({{ $item2 -> icd10 -> subnama ?? '-' }})</td>
                             <td> 
                               <ul style="padding-left: 20px;">
                                 @foreach($item2->obat as $o)
@@ -225,7 +225,9 @@
                                 </li>
                                 @endforeach
                               </ul>
+                              @if(Auth::user()->id == $item2 -> dokter -> id)
                               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#obat{{ $item2 -> id }}">+</button>
+                              @endif
                             </td>
                             <td> {{ $item2 -> tindakan ?? '-'}} </td>
                             <td> {{ $item2 -> created_at }} </td>
@@ -242,7 +244,7 @@
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambahkan Obat</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
@@ -251,7 +253,7 @@
                                   <label for="exampleInputBorder">1. Obat</label>
                                   <select class="js-example-basic-multiple" name="obat_id[]" multiple="multiple">
                                     @foreach($data3 as $item3)
-                                    <option value="{{ $item3 -> id }}">{{$item3 -> nama}}</option>
+                                    <option class="obat-list" value="{{ $item3 -> id }}">{{$item3 -> nama}}</option>
                                     @endforeach
                                   </select>
                                 </div>
@@ -281,10 +283,10 @@
                                       </div>
                                       <div class="form-group">
                                         <label for="exampleInputBorder">2. ICD 10</label>
-                                        <select class="form-select" name="icd10" aria-label="Default select example">
-                                          <option value="" selected>Pilih ICD 10</option>
+                                        <select class="js-example-basic-multiple-limit" name="icd10" multiple="multiple">
+                                          <option value="{{ $item2 -> icd10_id ?? '' }}" selected>-- {{ $item2 -> icd10 -> nama ?? '' }}</option>
                                           @foreach($data4 as $item4)
-                                          <option value="{{ $item4 -> id ?? '-'}}">{{$item4 -> nama ?? 'Empty'}}</option>
+                                          <option value="{{ $item4 -> id ?? ''}}">{{$item4 -> nama ?? 'Empty'}} ({{ $item4 -> subnama ?? 'Empty' }})</option>
                                           @endforeach
                                         </select>
                                       </div>
