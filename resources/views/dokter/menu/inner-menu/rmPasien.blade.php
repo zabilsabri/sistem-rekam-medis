@@ -268,7 +268,7 @@
                         </div>
 
                         <!-- Modal Edit Data-->
-                          <div class="modal fade" id="edit{{ $item2 -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal edit-rm fade" id="edit{{ $item2 -> id }}" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -283,7 +283,7 @@
                                       </div>
                                       <div class="form-group">
                                         <label for="exampleInputBorder">2. ICD 10</label>
-                                        <select class="js-example-basic-multiple-limit" name="icd10" multiple="multiple">
+                                        <select class="js-example-basic-multiple-limit" name="icd10">
                                           <option value="{{ $item2 -> icd10_id ?? '' }}" selected>-- {{ $item2 -> icd10 -> nama ?? '' }}</option>
                                           @foreach($data4 as $item4)
                                           <option value="{{ $item4 -> id ?? ''}}">{{$item4 -> nama ?? 'Empty'}} ({{ $item4 -> subnama ?? 'Empty' }})</option>

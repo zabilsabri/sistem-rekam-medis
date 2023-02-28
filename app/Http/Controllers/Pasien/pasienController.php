@@ -188,7 +188,7 @@ class pasienController extends Controller
 
     public function rmDokter()
     {
-        $data = keluhan::where('dokter_id', '=', Auth::user()->id)->whereNull('tindakan')->get();
+        $data = keluhan::where('dokter_id', '=', Auth::user()->id)->get();
         return view('dokter.menu.riwayatMedis')
             ->with(compact('data'));
     }

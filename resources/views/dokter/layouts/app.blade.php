@@ -168,12 +168,19 @@
 
 <script>
   $( '.js-example-basic-multiple' ).select2( {
-    theme: 'bootstrap-5'
+    theme: 'bootstrap-5',
+
   } );
   $( '.js-example-basic-multiple-limit' ).select2( {
     theme: 'bootstrap-5',
-    maximumSelectionLength: 1,
-    minimumInputLength: 3
+    minimumInputLength: 1,
+    dropdownParent: $(".edit-rm"),
+  }).on('select2:open',function(){
+
+    $('.select2-dropdown--above').attr('id','fix');
+    $('#fix').removeClass('select2-dropdown--above');
+    $('#fix').addClass('select2-dropdown--below');
+
   });
 </script>
 
