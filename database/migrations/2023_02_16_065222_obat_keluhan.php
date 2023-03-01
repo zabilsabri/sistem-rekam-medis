@@ -16,12 +16,10 @@ return new class extends Migration
         Schema::create('keluhan_obat', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('keluhan_id');
-            $table->unsignedBigInteger('obat_id')->nullable();
+            $table->string('nama_obat')->nullable();
             $table->timestamps();
             $table->foreign('keluhan_id')
               ->references('id')->on('keluhans')->onDelete('cascade');
-            $table->foreign('obat_id')
-                ->references('id')->on('obats')->onDelete('cascade');
         });
     }
 

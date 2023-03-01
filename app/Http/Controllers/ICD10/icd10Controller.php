@@ -20,7 +20,6 @@ class icd10Controller extends Controller
     {
         $request->validate([
             'kode' => 'required',
-            'subkode' => 'required',
             'deskripsi' => 'required',
         ]);
 
@@ -37,7 +36,6 @@ class icd10Controller extends Controller
 
         $request->validate([
             'kode' => 'required',
-            'subkode' => 'required',
             'deskripsi' => 'required',
         ]);
 

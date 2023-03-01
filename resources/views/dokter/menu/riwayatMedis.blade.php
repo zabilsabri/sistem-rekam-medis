@@ -19,7 +19,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table class="table table-bordered" id="tableBlog">
+                <table class="table table-bordered" id="tableBlog2">
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
@@ -35,7 +35,7 @@
                         @foreach($data as $index => $item)
                         <tr>
                             <td> {{ $index + 1 }} </td>
-                            <td>RM - {{ $item -> id }}</td>
+                            <td> RM - {{ $item -> id }}</td>
                             <td> {{ $item -> pasien -> nama }} </td>
                             <td> {{ $item -> keluhan }} </td>
                             <td> {{ $item -> poli -> nama }} </td>

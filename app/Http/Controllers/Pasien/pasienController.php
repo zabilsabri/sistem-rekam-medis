@@ -210,18 +210,19 @@ class pasienController extends Controller
 
     public function editObatDokter(Request $request, $id, $pId)
     {
-        $obat =  $request->input('obat_id', []);
+        $obat_raw =  $request->obat;
+        $obat = explode(',', $obat_raw);
 
         foreach ($obat as $index => $value) {
             $units[] = [
                 "keluhan_id" => $id,
-                "obat_id" => $obat[$index],
+                "nama_obat" => $obat[$index],
             ];
         }
-
+        $delete = obat_keluhan::where('keluhan_id','=', $id)->delete();
         $created = obat_keluhan::insert($units);
   
-        return redirect()->to('/rmPasienDokter/'.$pId)->send()->with('success', 'Riwayat Medis Pasien Berhasil Diedit!');
+        return redirect()->to('/rmPasienDokter/'.$pId)->send()->with('success', 'Obat Pasien Berhasil Diedit!');
     }
 
     public function hapusRM($id)

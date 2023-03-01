@@ -31,10 +31,11 @@ class keluhan extends Model
     	return $this->belongsTo('App\Models\icd10');
     }
 
-    public function obat()
+    public function obat_keluhan()
     {
-    	return $this->belongsToMany('App\Models\obat');
+    	return $this->hasMany('App\Models\obat_keluhan');
     }
+
 
     public function getCreatedAtAttribute($value){
         return Carbon::parse($value)->format('d/m/Y');

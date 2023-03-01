@@ -171,24 +171,40 @@
     theme: 'bootstrap-5',
 
   } );
-  $( '.js-example-basic-multiple-limit' ).select2( {
+  function openSelect2(id){
+    $( '.js-example-basic-multiple-limit'+id ).select2( {
     theme: 'bootstrap-5',
     minimumInputLength: 1,
-    dropdownParent: $(".edit-rm"),
-  }).on('select2:open',function(){
+    dropdownParent: $("#edit"+id),
+    }).on('select2:open',function(){
 
-    $('.select2-dropdown--above').attr('id','fix');
-    $('#fix').removeClass('select2-dropdown--above');
-    $('#fix').addClass('select2-dropdown--below');
+      $('.select2-dropdown--above').attr('id','fix');
+      $('#fix').removeClass('select2-dropdown--above');
+      $('#fix').addClass('select2-dropdown--below');
 
-  });
+    });
+  }
 </script>
 
 <!-- datatable -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script>
       $(document).ready( function () {
-         $('#tableBlog').DataTable();
+         $('#tableBlog').DataTable({
+          "columns": [
+            { "width": "5%" },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            { "width": "20%" },
+          ]
+         });
+
+         $('#tableBlog2').DataTable();
       } );
    </script>
 </script>

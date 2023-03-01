@@ -87,9 +87,9 @@
                             <td> {{ $item2 -> poli -> nama }}</td>
                             <td>
                               <ul style="padding-left: 20px;">
-                                @foreach($item2->obat as $o)
+                                @foreach($item2->obat_keluhan as $o)
                                 <li>
-                                  {{ $o -> nama ?? '-' }}
+                                  {{ $o -> nama_obat ?? '-' }}
                                 </li>
                                 @endforeach
                               </ul>

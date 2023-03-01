@@ -206,7 +206,7 @@
                             <th>Obat</th>
                             <th>Tindakan</th>
                             <th>Tgl Berobat</th>
-                            <th>Details</th>
+                            <th style="width: 100px">Details</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -219,21 +219,19 @@
                             <td> {{ $item2 -> icd10 -> nama ?? '-' }} ({{ $item2 -> icd10 -> subnama ?? '-' }})</td>
                             <td> 
                               <ul style="padding-left: 20px;">
-                                @foreach($item2->obat as $o)
+                                @foreach($item2->obat_keluhan as $o)
                                 <li>
-                                  {{ $o -> nama ?? '-' }}
+                                  {{ $o -> nama_obat ?? '-' }}
                                 </li>
                                 @endforeach
                               </ul>
-                              @if(Auth::user()->id == $item2 -> dokter -> id)
-                              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#obat{{ $item2 -> id }}">+</button>
-                              @endif
                             </td>
                             <td> {{ $item2 -> tindakan ?? '-'}} </td>
                             <td> {{ $item2 -> created_at }} </td>
                             <td>
                               @if(Auth::user()->id == $item2 -> dokter -> id)
-                              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{ $item2 -> id }}">Edit</button>
+                              <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#obat{{ $item2 -> id }}">+ Obat</button>
+                              <button type="button" class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#edit{{ $item2 -> id }}" onClick="openSelect2({{ $item2->id }});">Edit</button>
                               @endif
                             </td>
                         </tr>
@@ -251,24 +249,20 @@
                                 <form action="/editObatDokter/{{ $item2 -> id }}/{{ $item -> id }}">
                                 <div class="form-group">
                                   <label for="exampleInputBorder">1. Obat</label>
-                                  <select class="js-example-basic-multiple" name="obat_id[]" multiple="multiple">
-                                    @foreach($data3 as $item3)
-                                    <option class="obat-list" value="{{ $item3 -> id }}">{{$item3 -> nama}}</option>
-                                    @endforeach
-                                  </select>
+                                  <br>                                
+                                  <small>Jika obat lebih dari satu, pisahkan dengan koma (,)</small>
+                                  <input type="text" name="obat" class="form-control" />
                                 </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                               </div>
                               </form>
                             </div>
                           </div>
                         </div>
-
                         <!-- Modal Edit Data-->
-                          <div class="modal edit-rm fade" id="edit{{ $item2 -> id }}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal edit-rm fade" id="edit{{ $item2 -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -283,8 +277,8 @@
                                       </div>
                                       <div class="form-group">
                                         <label for="exampleInputBorder">2. ICD 10</label>
-                                        <select class="js-example-basic-multiple-limit" name="icd10">
-                                          <option value="{{ $item2 -> icd10_id ?? '' }}" selected>-- {{ $item2 -> icd10 -> nama ?? '' }}</option>
+                                        <select class="js-example-basic-multiple-limit{{ $item2 -> id }}" name="icd10">
+                                          <option value="{{ $item2 -> icd10_id ?? '' }}" selected>-- {{ $item2 -> icd10 -> nama ?? '' }} ({{ $item2 -> icd10 -> subnama ?? '' }})</option>
                                           @foreach($data4 as $item4)
                                           <option value="{{ $item4 -> id ?? ''}}">{{$item4 -> nama ?? 'Empty'}} ({{ $item4 -> subnama ?? 'Empty' }})</option>
                                           @endforeach

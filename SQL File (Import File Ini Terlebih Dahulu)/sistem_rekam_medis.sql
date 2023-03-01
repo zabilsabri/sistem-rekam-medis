@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2023 at 07:49 PM
+-- Generation Time: Feb 28, 2023 at 09:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -76,10 +76,8 @@ INSERT INTO `icd10s` (`id`, `nama`, `subnama`, `deskripsi`, `created_at`, `updat
 (17, 'Z25', '', 'Perlu imunisasi untuk melawan penyakit virus tunggal lain', NULL, NULL),
 (18, 'Z26', '', 'Perlu imunisasi untuk melawan penyakit infeksi tunggal lainnya', NULL, NULL),
 (19, 'Z27', '', 'Perlu imunisasi untuk melawan kombinasi-kombinasi penyakit infeksi', NULL, NULL),
-(20, 'A00', '', 'Kolera', NULL, NULL),
 (21, 'A00', '0', 'Kolera yang disebabkan oleh Vibrio cholerae 01, biovar cholerae', NULL, NULL),
 (22, 'A00', '1', 'Kolera yang disebabkan oleh Vibrio cholerae 01, biovar el tor', NULL, NULL),
-(23, 'A00', '9', 'Kolera, tidak terspesifikasi', NULL, NULL),
 (24, 'A01', '', 'Demam tifoid dan paratifoid', NULL, NULL),
 (25, 'A01', '0', 'Demam tifoid', NULL, NULL),
 (26, 'A01', '1', 'Demam paratifoid A', NULL, NULL),
@@ -390,7 +388,9 @@ INSERT INTO `icd10s` (`id`, `nama`, `subnama`, `deskripsi`, `created_at`, `updat
 (331, 'I08', '8', 'Penyakit-penyakit katup multipel lainnya', NULL, NULL),
 (332, 'I08', '9', 'Penyakit katup multipel, tidak terspesifikasi', NULL, NULL),
 (333, 'I09', '', 'Penyakit-penyakit jantung reumatik lainnya', NULL, NULL),
-(334, 'I09', '0', 'Miokarditis reumatik', NULL, NULL);
+(334, 'I09', '0', 'Miokarditis reumatik', NULL, '2023-02-28 11:12:25'),
+(335, 'A00', NULL, 'Kolera', '2023-02-28 11:15:17', '2023-02-28 11:15:17'),
+(336, 'A00', '9', 'Kolera, tidak terspesifikasi', '2023-02-28 11:15:48', '2023-02-28 11:15:48');
 
 -- --------------------------------------------------------
 
@@ -416,8 +416,10 @@ CREATE TABLE `keluhans` (
 
 INSERT INTO `keluhans` (`id`, `pasien_id`, `icd10_id`, `dokter_id`, `poli_id`, `keluhan`, `tindakan`, `created_at`, `updated_at`) VALUES
 (1, 1, 2, 4, 1, 'Sakit Kepala', 'Berikan Obat', '2023-02-18 02:13:00', '2023-02-27 10:26:25'),
-(4, 3, 4, 2, 3, 'Diare', 'asd', '2023-02-18 02:30:08', '2023-02-27 08:17:07'),
-(5, 1, NULL, 4, 1, 'Sakit Perut', NULL, '2023-02-27 10:22:02', '2023-02-27 10:22:02');
+(4, 3, 4, 2, 3, 'Diare', 'Berikan Obat', '2023-02-18 02:30:08', '2023-02-28 04:42:16'),
+(5, 1, NULL, 4, 1, 'Sakit Perut', NULL, '2023-02-27 10:22:02', '2023-02-27 10:22:02'),
+(6, 3, 68, 2, 3, 'Keseleo', 'Foto Ronsen', '2023-02-27 17:09:54', '2023-02-28 12:12:06'),
+(7, 3, NULL, 2, 3, 'Sakit Dada', NULL, '2023-02-28 05:07:56', '2023-02-28 05:07:56');
 
 -- --------------------------------------------------------
 
@@ -428,10 +430,18 @@ INSERT INTO `keluhans` (`id`, `pasien_id`, `icd10_id`, `dokter_id`, `poli_id`, `
 CREATE TABLE `keluhan_obat` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `keluhan_id` bigint(20) UNSIGNED NOT NULL,
-  `obat_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `nama_obat` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `keluhan_obat`
+--
+
+INSERT INTO `keluhan_obat` (`id`, `keluhan_id`, `nama_obat`, `created_at`, `updated_at`) VALUES
+(15, 6, 'panadol', NULL, NULL),
+(16, 6, ' paracetamol', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -485,7 +495,48 @@ INSERT INTO `obats` (`id`, `nama`, `jenis_obat`, `deskripsi`, `created_at`, `upd
 (2, 'Acetazolamide', 'Diuretik', 'Mengobati glaukoma, edema, epilepsi, dan altitude sickness', '2023-02-18 02:04:35', '2023-02-18 02:04:35'),
 (3, 'Aclidinium', 'Bronkodilator', 'Meredakan gejala PPOK', '2023-02-18 02:05:05', '2023-02-18 02:05:05'),
 (4, 'Adalimumab', 'DMARDs', 'Meredakan gejala peradangan pada penyakit rheumatoid arthritis', '2023-02-18 02:06:00', '2023-02-18 02:06:24'),
-(5, 'Alprazolam', 'Benzodiazepine', 'Mengatasi gangguan kecemasan dan gangguan panik', '2023-02-18 02:07:04', '2023-02-18 02:07:04');
+(5, 'Alprazolam', 'Benzodiazepine', 'Mengatasi gangguan kecemasan dan gangguan panik', '2023-02-18 02:07:04', '2023-02-18 02:07:04'),
+(9, 'Metformin', 'Antidiabetes', 'Menurunkan produksi glukosa di hati dan meningkatkan sensitivitas tubuh terhadap insulin', '2023-02-28 11:18:47', '2023-02-28 11:18:47'),
+(10, 'Sulfonilurea', 'Antidiabetes', 'Membantu mengendalikan gula darah dengan cara merangsang pankreas', '2023-02-28 11:20:21', '2023-02-28 11:20:21'),
+(11, 'Meglitinide', 'Antidiabetes', 'Merangsang pankreas menghasilkan lebih banyak insulin dengan cepat', '2023-02-28 11:21:16', '2023-02-28 11:21:16'),
+(12, 'Alpara', 'Dekongestan', 'Meringankan gejala hidung tersumbat, hidung meler, dan bersin-bersin.', '2023-02-28 11:23:29', '2023-02-28 11:23:29'),
+(13, 'Ephedrine', 'Dekongestan', 'Mengatasi hidung tersumbat dan sesak napas akibat penyempitan saluran udara di paru-paru (bronkospasme)', '2023-02-28 11:24:35', '2023-02-28 11:24:35'),
+(14, 'Phenylephrine', 'Dekongestan', 'Mengatasi hidung tersumbat', '2023-02-28 11:25:29', '2023-02-28 11:25:29'),
+(15, 'Oxymetazoline', 'Dekongestan', 'Mengatasi hidung tersumbat yang tersedia dalam bentuk semprot hidung dan tetes hidung.', '2023-02-28 11:27:03', '2023-02-28 11:27:32'),
+(16, 'Chlorpheniramine', 'Antihistamin', 'Meredakan gejala alergi yang bisa dipicu oleh makanan, obat-obatan, gigitan serangga, atau paparan debu, bulu binatang, maupun serbuk sari', '2023-02-28 11:29:13', '2023-02-28 11:29:13'),
+(17, 'Cyproheptadine', 'Antihistamin', 'Meredakan gejala alergi, seperti bersin, mata berair, pilek, biduran, atau gatal-gatal pada kulit.', '2023-02-28 11:29:59', '2023-02-28 11:29:59'),
+(18, 'Brompheniramine', 'Antihistamin', 'Meredakan gejala alergi, seperti mata merah, gatal, atau berair, bersin, pilek, atau gatal pada hidung dan tenggorokan', '2023-02-28 11:30:35', '2023-02-28 11:30:35'),
+(19, 'Dimenhydrinate', 'Antihistamin', 'Mencegah atau mengobati mual, muntah, atau pusing berputar (vertigo) akibat mabuk perjalanan', '2023-02-28 11:31:33', '2023-02-28 11:31:33'),
+(20, 'Doxylamine', 'Antihistamin', 'Meredakan gejala alergi, rhinitis alergi, dan pilek, serta mengatasi sulit tidur', '2023-02-28 11:33:13', '2023-02-28 11:33:13'),
+(21, 'Fexofenadine', 'Antihistamin', 'Menangani gejala alergi, seperti bersin, rasa gatal, mata merah dan berair, hidung meler atau tersumbat, mengi atau sesak napas, serta biduran', '2023-02-28 11:34:41', '2023-02-28 11:34:41'),
+(22, 'Azelastine', 'Antihistamin', 'Meredakan gejala alergi pada hidung', '2023-02-28 11:35:25', '2023-02-28 11:35:25'),
+(23, 'Atropin', 'Antikolinergik', 'Menangani denyut jantung lambat (bradikardia) dan keracunan insektisida', '2023-02-28 11:36:46', '2023-02-28 11:36:46'),
+(24, 'Chlorpromazine', 'Antipsikotik', 'Menangani gejala psikosis, seperti halusinasi, dan pikiran tidak wajar, pada skizofrenia', '2023-02-28 11:39:48', '2023-02-28 11:39:48'),
+(25, 'Trifluoperazine', 'Antipsikotik', 'Mengobati gangguan mental, seperti skizofrenia dan gangguan psikotik', '2023-02-28 11:41:14', '2023-02-28 11:41:14'),
+(26, 'Cariprazine', 'Antipsikotik atipikal', 'Mengatasi gejala skizofrenia', '2023-02-28 11:42:55', '2023-02-28 11:42:55'),
+(27, 'Aripiprazole', 'Antipsikotik atipikal', 'Meredakan dan mengontrol gejala gangguan jiwa psikosis akibat skizofrenia', '2023-02-28 11:43:31', '2023-02-28 11:43:31'),
+(28, 'Olanzapine', 'Antipsikotik atipikal', 'Mengobati gejala skizofrenia, seperti kekacauan berpikir, perubahan perilaku, halusinasi, atau delusi', '2023-02-28 11:44:03', '2023-02-28 11:44:03'),
+(29, 'Risperidone', 'Antipsikotik atipikal', 'Mengatasi gangguan perilaku, termasuk gangguan perilaku pada penderita Alzheimer, atau anak yang menderita autis', '2023-02-28 11:44:33', '2023-02-28 11:47:31'),
+(30, 'Paliperidone', 'Antipsikotik atipikal', 'Mengatasi gejala gangguan skizoafektif, yaitu kombinasi dari skizofrenia dan gangguan mood, seperti depresi atau gangguan bipolar.', '2023-02-28 11:46:17', '2023-02-28 11:46:17'),
+(31, 'Carboplatin', 'Antikanker', 'Menangani kanker, seperti kanker ovarium stadium lanjut atau kanker paru sel kecil', '2023-02-28 11:48:36', '2023-02-28 11:48:36'),
+(32, 'Celecoxib', 'OAINS jenis COX-2 inhibitor', 'Meredakan nyeri dan bengkak pada berbagai kondisi, seperti rheumatoid arthritis, osteoarthritis, ankylosing spondylitis, atau nyeri saat menstruasi', '2023-02-28 11:49:43', '2023-02-28 11:49:43'),
+(33, 'Cimetidine', 'Antagonis H2', 'Mengobati asam lambung berlebih, seperti pada penyakit asam lambung (GERD) atau sindrom Zollinger-Ellison', '2023-02-28 11:51:04', '2023-02-28 11:51:04'),
+(34, 'Famotidine', 'Antagonis H2', 'Mengatasi kondisi yang disebabkan oleh produksi asam lambung berlebih, seperti penyakit asam lambung (GERD) dan sakit maag', '2023-02-28 11:51:30', '2023-02-28 11:51:30'),
+(35, 'Ranitidin', 'Antagonis H2', 'Menurunkan produksi asam lambung berlebih', '2023-02-28 11:53:16', '2023-02-28 11:53:16'),
+(36, 'Cytarabine', 'Antikanker', 'Mengatasi beberapa jenis kanker darah, termasuk leukemia mieloblastik akut, leukemia limfoblastik akut, dan leukemia mieloblastik kronis', '2023-02-28 11:56:28', '2023-02-28 11:56:28'),
+(37, 'Dapsone', 'Antibiotik', 'Mengobati kusta, dermatitis herpetiformis, dan jerawat, serta mengobati dan mencegah pneumocystis jiroveci pneumonia, atau toksoplasmosis, pada penderita HIV/AIDS.', '2023-02-28 11:57:54', '2023-02-28 11:57:54'),
+(38, 'Desonide', 'Kortikosteroid topikal', 'Mengatasi gatal, bengkak, dan kemerahan pada kulit yang disebabkan oleh dermatitis, eksim (dermatitis atopik), alergi, atau psoriasis', '2023-02-28 11:58:31', '2023-02-28 11:58:31'),
+(39, 'Aspirin', 'Antiplatelet', 'Mencegah pembentukan prostaglandin, yaitu zat yang memicu timbulnya peradangan, nyeri, atau demam', '2023-02-28 12:00:28', '2023-02-28 12:00:28'),
+(40, 'Prasugrel', 'Antiplatelet', 'Mengatasi serangan jantung, atau mencegah serangan jantung berulang pada orang yang berisiko tinggi mengalaminya', '2023-02-28 12:01:21', '2023-02-28 12:01:21'),
+(41, 'Dipyridamole', 'Antiplatelet', 'Mencegah terbentuknya gumpalan darah dan membantu pemeriksaan radiologi jantung', '2023-02-28 12:02:03', '2023-02-28 12:02:03'),
+(42, 'Ticlopidine', 'Antiplatelet', 'Mencegah penggumpalan darah yang bisa menyebabkan stroke atau serangan jantung', '2023-02-28 12:02:34', '2023-02-28 12:02:34'),
+(43, 'Cilostazol', 'Antiplatelet', 'Mengobati gejala klaudikasio intermiten, yaitu nyeri di tungkai bawah saat berjalan akibat sirkulasi darah yang tidak lancar', '2023-02-28 12:03:05', '2023-02-28 12:03:05'),
+(44, 'Anagrelide', 'Antiplatelet', 'Mengobati trombositemia atau trombositosis, yaitu tingginya jumlah keping darah atau trombosit akibat gangguan pada sumsum tulang', '2023-02-28 12:04:11', '2023-02-28 12:04:11'),
+(45, 'Ticagrelor', 'Antiplatelet', 'Mengobati dan menurunkan risiko terjadinya serangan jantung atau stroke pada orang yang pernah mengalami serangan jantung atau sindrom koroner akut', '2023-02-28 12:05:03', '2023-02-28 12:05:03'),
+(46, 'Clopidogrel', 'Antiplatelet', 'Mencegah penyumbatan pembuluh darah dan membantu melancarkan peredaran darah, sehingga obat ini dapat menurunkan risiko terjadinya stroke atau serangan jantung', '2023-02-28 12:06:01', '2023-02-28 12:06:01'),
+(47, 'Erdosteine', 'Mukolitik', 'Meredakan batuk berdahak, akibat kambuhnya bronkitis kronis', '2023-02-28 12:06:53', '2023-02-28 12:06:53'),
+(48, 'Tacrolimus', 'Imunosupresan', 'Mencegah atau mengobati respons penolakan dari tubuh setelah transplantasi ginjal, jantung, atau hati', '2023-02-28 12:07:49', '2023-02-28 12:07:49'),
+(49, 'Ciclosporin', 'Imunosupresan', 'meredam respons sistem kekebalan yang berlebihan dan berdampak negatif pada tubuh', '2023-02-28 12:08:49', '2023-02-28 12:08:49');
 
 -- --------------------------------------------------------
 
@@ -598,7 +649,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `jabatan`, `poli_id`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'admin@gmail.com', '$2y$10$hJXM1VX4m/OgW8vmnHqrs.oB0g4VKzh1TeAe41mEuiyNd6zziq1ty', 'admin', NULL, NULL, '2023-02-27 02:40:46'),
-(2, 'Dr. Dasril', 'dasril@gmail.com', '$2y$10$S0yXEzAX7/u9uKfv7tQx0Ou/N19EJuD7Ig9qkwa8SF51bp2gSPtCC', 'dokter', 3, '2023-02-18 02:09:51', '2023-02-18 02:09:51'),
+(2, 'Dr. Dasril', 'dasril@gmail.com', '$2y$10$S0yXEzAX7/u9uKfv7tQx0Ou/N19EJuD7Ig9qkwa8SF51bp2gSPtCC', 'dokter', 3, '2023-02-18 02:09:51', '2023-02-27 21:06:03'),
 (3, 'Drg. Heri', 'heri@gmail.com', '$2y$10$7GnfhVApGShUXEiOPciAy.xJlhU63fbiXLHmfMguu80xpkrMT/K4C', 'dokter', 2, '2023-02-18 02:10:05', '2023-02-18 02:10:05'),
 (4, 'Dr. Toto', 'toto@gmail.com', '$2y$10$gIQdRUm0drnce9XNdDHZ4.B9eXukXmgucZhSGkRrS.hqNlKME/sw.', 'dokter', 1, '2023-02-18 02:10:39', '2023-02-18 02:10:39');
 
@@ -634,8 +685,7 @@ ALTER TABLE `keluhans`
 --
 ALTER TABLE `keluhan_obat`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `keluhan_obat_keluhan_id_foreign` (`keluhan_id`),
-  ADD KEY `keluhan_obat_obat_id_foreign` (`obat_id`);
+  ADD KEY `keluhan_obat_keluhan_id_foreign` (`keluhan_id`);
 
 --
 -- Indexes for table `migrations`
@@ -698,19 +748,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `icd10s`
 --
 ALTER TABLE `icd10s`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=335;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
 
 --
 -- AUTO_INCREMENT for table `keluhans`
 --
 ALTER TABLE `keluhans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `keluhan_obat`
 --
 ALTER TABLE `keluhan_obat`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -722,7 +772,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `obats`
 --
 ALTER TABLE `obats`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `pasiens`
@@ -765,8 +815,7 @@ ALTER TABLE `keluhans`
 -- Constraints for table `keluhan_obat`
 --
 ALTER TABLE `keluhan_obat`
-  ADD CONSTRAINT `keluhan_obat_keluhan_id_foreign` FOREIGN KEY (`keluhan_id`) REFERENCES `keluhans` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `keluhan_obat_obat_id_foreign` FOREIGN KEY (`obat_id`) REFERENCES `obats` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `keluhan_obat_keluhan_id_foreign` FOREIGN KEY (`keluhan_id`) REFERENCES `keluhans` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users`
