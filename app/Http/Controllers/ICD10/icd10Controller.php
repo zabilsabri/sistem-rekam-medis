@@ -9,11 +9,20 @@ use DB;
 
 class icd10Controller extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $data = DB::table('icd10s')->get();
-        return view('admin.menu.dataICD10')
-            ->with(compact('data'));
+        if($request->has('search')){
+            $data = DB::table('icd10s')->where('nama', 'LIKE', '%' .$request->search. '%')
+            ->orWhere('subnama', 'LIKE', '%' .$request->search. '%')
+            ->orWhere('deskripsi', 'LIKE', '%' .$request->search. '%')
+            ->paginate(10);
+            return view('admin.menu.dataICD10')
+                ->with(compact('data'));
+        } else {
+            $data = DB::table('icd10s')->paginate(10);
+            return view('admin.menu.dataICD10')
+                ->with(compact('data'));
+        }
     }
 
     public function create(Request $request)

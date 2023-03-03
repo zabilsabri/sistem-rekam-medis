@@ -1,6 +1,13 @@
 @extends('admin.layouts.app' , ['title' => 'Menu Admin'])
 @section('content')
 
+<style>
+    .search-input{
+        float: right;
+        width: 25%;
+    }
+</style>
+
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content p-4">
@@ -20,20 +27,34 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table class="table table-bordered" id="tableBlog">
+                <div class="search-input mb-2">
+                    <form class="d-flex" method="GET" action="dataICD10" role="search">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Masukkan Nama" aria-label="Search">
+                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    </form> 
+                </div>
+                <?php if(isset($_GET['search'])){ 
+                    $searchData = $_GET['search'];    
+                ?>
+                    <div class="alert alert-success alert-dismissible fade show w-50" role="alert">
+                        <strong>Data Yang Dicari ' <?php echo $searchData; ?> '</strong>
+                        <a type="button" class="btn-close" aria-label="Close" href="dataICD10?page=1"></a>
+                    </div>
+                <?php } ?>
+                <table class="table table-bordered" >
                     <thead>
                         <tr>
                             <th style="width: 10px">No</th>
                             <th>Kode</th>
                             <th>Sub-Kode</th>
                             <th>Diagnosa</th>
-                            <th style="width: 130px">Details</th>
+                            <th style="width: 200px">Details</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($data as $index => $item)
                         <tr>
-                            <td> {{ $index + 1 }} </td>
+                            <td> {{ $index+ $data->firstItem() }} </td>
                             <td>{{ $item -> nama }}</td>
                             <td>{{ $item -> subnama ?? ""}}</td>
                             <td>{{ $item -> deskripsi }}</td>
@@ -95,6 +116,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-end mt-1">
+                    {!! $data->withQueryString()->links() !!}
+                </div>
             </div>
             <!-- /.card-body -->      
         </div>
